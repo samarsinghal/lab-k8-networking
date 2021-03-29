@@ -1,0 +1,12 @@
+apiVersion: contour.heptio.com/v1beta1
+kind: IngressRoute
+metadata:
+  name: helloworld-ingress-route
+spec:
+  virtualhost:
+    fqdn: helloworld.tanzudemo.frankcarta.com #
+  routes:
+  - match: /
+    services:
+    - name: helloworld
+      port: 80

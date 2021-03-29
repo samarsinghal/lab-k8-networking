@@ -1,0 +1,14 @@
+name: Container Configuration Management
+
+modules:
+    activate:
+    - workshop-overview
+    - k8-networking/00-services
+    - k8-networking/01-clusterip
+    - k8-networking/02-nodeport
+    - k8-networking/03-loadbalancer
+    - k8-networking/04-externalname
+    - k8-networking/05-ingress:
+    - k8-networking/06-contour
+    - k8-networking/07-networkpolicy:
+    - workshop-summary

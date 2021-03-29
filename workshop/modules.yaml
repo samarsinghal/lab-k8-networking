@@ -1,0 +1,24 @@
+modules:
+    workshop-overview:
+        name: Workshop Overview
+        exit_sign: Start Workshop
+    k8-networking/00-services:
+        name: k8 Networking - Services
+    k8-networking/01-clusterip:
+        name: k8 Networking - ClusterIP
+    k8-networking/02-nodeport:
+        name: k8 Networking - NodePort
+    k8-networking/03-loadbalancer:
+        name: k8 Networking - Loadbalancer
+    k8-networking/04-externalname:
+        name: k8 Networking - ExternalName
+    k8-networking/05-ingress:
+        name: k8 Networking - Ingress
+    k8-networking/06-contour:
+        name: k8 Networking - Contour
+    k8-networking/07-networkpolicy:
+        name: k8 Networking - Network Policy and Calico
+    workshop-summary:
+        name: Workshop Summary
+        exit_sign: Finish Workshop
+          
