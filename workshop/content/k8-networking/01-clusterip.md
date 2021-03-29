@@ -38,7 +38,8 @@ service/helloworld created
 Describe the Service,
 
 ```execute
-kubectl describe svc helloworld -n $MY_NS
+kubectl describe svc helloworld
+```
 
 Name:              helloworld
 Namespace:         my-apps
@@ -52,7 +53,6 @@ TargetPort:        http-server/TCP
 Endpoints:         172.30.172.228:8080,172.30.234.176:8080,172.30.234.177:8080
 Session Affinity:  None
 Events:            <none>
-```
 
 You see that Kubernetes by default creates a Service of type `ClusterIP`. The service is now available and discoverable, but only within the cluster, using the `Endpoints` and `port` mapping found via the `selector` and `labels`.
 

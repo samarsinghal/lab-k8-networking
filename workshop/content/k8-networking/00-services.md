@@ -16,7 +16,7 @@ cd ~/k8-networking
 ```
 
 ```execute
-$ kubectl create -f helloworld-deployment.yaml
+kubectl create -f helloworld-deployment.yaml
 ```
 
 output:
@@ -27,7 +27,7 @@ deployment.apps/helloworld created
 The `helloworld` application is now deployed and a Kubernetes `Deployment` object was created. 
 
 ```execute
-$ kubectl get pods
+kubectl get pods
 ```
 
 output
