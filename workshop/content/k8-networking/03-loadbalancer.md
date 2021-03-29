@@ -1,5 +1,3 @@
-# Loadbalancer and Network Load Balancer (NLB) 1.0
-
 ## Pre-requisites
 
 Finish the [Services](services.md), [ClusterIP](clusterip.md), and [NodePort](nodeport.md) labs.
@@ -47,7 +45,7 @@ helloworld   LoadBalancer   172.21.86.16   169.47.155.242   8080:32387/TCP   12m
 To access the Service of the `helloworld` from the public internet, you can use the public IP address of the NLB and the assigned NodePort of the service in the format `<IP_address>:<NodePort>`.
 
 ```execute
-PUBLIC_IP=$(kubectl get svc helloworld --output json | jq -r '.status.loadBalancer.ingress[0].ip')
+PUBLIC_IP=$(kubectl get svc helloworld --output json | jq -r '.status.loadBalancer.ingress[0].hostname')
 echo $PUBLIC_IP
 
 NODE_PORT=$(kubectl get svc helloworld --output json | jq -r '.spec.ports[0].nodePort' )
@@ -64,4 +62,4 @@ curl -L -X POST "http://$PUBLIC_IP:$NODE_PORT/api/messages" -H 'Content-Type: ap
 
 Note:- Services of type `LoadBalancer` have some limitations. They cannot do TLS termination, do virtual hosts or path-based routing, so you can’t use a single load balancer to proxy to multiple services. These limitations led to the addition in Kubernetes v1.2 of a separate kubernetes resource called `Ingress`.
 
-Next, go to [ExternalName](externalname.md).
+Next, go to [ExternalName](../../../k8-networking/externalname.md).

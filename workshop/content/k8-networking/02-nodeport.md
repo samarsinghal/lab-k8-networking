@@ -73,10 +73,13 @@ You can now connect to the service from outside the cluster via the public IP ad
 
 To connect to the service, we need the Public IP address of one of the worker nodes and the NodePort of the Service. You can use a bash processor called [`jq`](https://stedolan.github.io/jq/) to parse JSON from command line.
 
-```execute
+On this lab we don't have access to list nodes 
+
 PUBLIC_IP=$(kubectl get nodes -o wide -o json | jq -r '.items[0].status.addresses | .[] | select( .type=="ExternalIP" ) | .address ')
 echo $PUBLIC_IP
 
+
+```execute
 NODE_PORT=$(kubectl get svc helloworld --output json | jq -r '.spec.ports[0].nodePort' )
 echo $NODE_PORT
 ```
@@ -92,4 +95,4 @@ Output:
 
 The client connects to your application via a public IP address of a worker node and the NodePort. Each node proxies the port, `kube-proxy` receives the request, and forwards it to the service at the cluster IP. At this point the request matches the netfilter or `iptables` rules and gets redirected to the server pod. 
 
-However, we still require some level of load balancing. a `LoadBalancer` service is the standard way to expose a service. Go to [LoadBalancer](loadbalancer.md) to learn more about the ServiceType LoadBalancer.
+However, we still require some level of load balancing. a `LoadBalancer` service is the standard way to expose a service. Go to [LoadBalancer](../../../k8-networking/loadbalancer.md) to learn more about the ServiceType LoadBalancer.

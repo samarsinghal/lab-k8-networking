@@ -98,7 +98,7 @@ cat helloworld-ingress-subdomain.yaml
 
 Delete the previous Ingress resource and create the Ingress resource using subdomain paths.
 
-```
+```execute
 kubectl get ingress
 kubectl delete ingress helloworld-ingress 
 kubectl create -f helloworld-ingress-subdomain.yaml
@@ -136,4 +136,4 @@ Unless you’re running a very simple cloud application, you’ll likely need su
 
 ## Next
 
-Next, go to [Contour](06-contour.md).
+Next, go to [Contour](../../../k8-networking/06-contour.md).

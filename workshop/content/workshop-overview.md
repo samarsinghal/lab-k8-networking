@@ -14,11 +14,11 @@ We will also look at different use cases to explore Ingress Vs Gateway Vs Istio 
 
    **Lab1 Kubernetes Networking 101**
    
-   1. [Services](00-services.md)
-   2. [ClusterIP](01-clusterip.md)
-   3. [NodePort](02-nodeport.md)
-   4. [Loadbalancer](03-loadbalancer.md)
-   5. [ExternalName](04-externalname.md)
-   6. [Ingress](05-ingress.md)
-   7. [Contour](06-contour.md)
-   8. [Network Policy and Calico](07-networkpolicy.md)
+   1. [Services](../k8-networking/00-services.md)
+   2. [ClusterIP](../k8-networking/01-clusterip.md)
+   3. [NodePort](../k8-networking/02-nodeport.md)
+   4. [Loadbalancer](../k8-networking/03-loadbalancer.md)
+   5. [ExternalName](../k8-networking/04-externalname.md)
+   6. [Ingress](../k8-networking/05-ingress.md)
+   7. [Contour](../k8-networking/06-contour.md)
+   8. [Network Policy and Calico](../k8-networking/07-networkpolicy.md)

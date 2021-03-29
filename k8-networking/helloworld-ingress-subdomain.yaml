@@ -1,4 +1,4 @@
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: helloworld-ingress
@@ -10,11 +10,17 @@ spec:
       http:
         paths:
           - backend:
-              serviceName: helloworld
-              servicePort: 8080
+              service:
+                name: helloworld
+                port: 
+                  number: 8080
+            pathType: ImplementationSpecific
     - host: hello.helloworld.tanzudemo.frankcarta.com
       http:
         paths:
           - backend:
-              serviceName: helloworld
-              servicePort: 8080
+              service:
+                name: helloworld
+                port: 
+                  number: 8080
+            pathType: ImplementationSpecific
