@@ -7,6 +7,7 @@ Contour also introduces a new ingress API (HTTPProxy) which is implemented via a
 For this workshop we deployed contour ingress controller on the cluster 
 
 ```execute
+clear
 cat helloworld-ingress.yaml 
 ```
 
@@ -39,6 +40,7 @@ What are the problems with Ingress?
 lets see IngressRoute resource definition file https://github.com/projectcontour/contour/blob/main/design/ingressroute-design.md
 
 ```execute-2
+clear
 cat helloworld-ingressroute.yaml
 ```
 

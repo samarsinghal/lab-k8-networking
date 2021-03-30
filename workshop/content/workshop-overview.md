@@ -8,8 +8,6 @@ Kubernetes Networking, you will use different ways to control traffic on a Kuber
 
 Continue your learning by visiting the Network Policy, Calico, and Istio. With Istio, you can manage network traffic, load balance across microservices, enforce access policies, verify service identity, and more.
 
-We will also look at different use cases to explore Ingress Vs Gateway Vs Istio Service Mesh
-
 # Labs
 
    **Lab1 Kubernetes Networking 101**
