@@ -36,11 +36,12 @@ What are the problems with Ingress?
 
 ### Ingress to IngressRoute
 
-lets see IngressRoute resource definition file 
+lets see IngressRoute resource definition file https://github.com/projectcontour/contour/blob/main/design/ingressroute-design.md
 
 ```execute-2
 cat helloworld-ingressroute.yaml
 ```
+
 
 * Every Ingressroute document has one hostname. 
 
