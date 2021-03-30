@@ -15,6 +15,11 @@ clear
 cd ~/k8-networking
 ```
 
+```execute-2
+clear
+cd ~/k8-networking
+```
+
 ```execute
 kubectl create -f helloworld-deployment.yaml
 ```

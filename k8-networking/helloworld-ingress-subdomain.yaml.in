@@ -2,11 +2,12 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: helloworld-ingress
+  namespace: ${SESSION_NAMESPACE}
   annotations:
     kubernetes.io/ingress.class: contour
 spec:
   rules:
-    - host: helloworld.tanzudemo.frankcarta.com
+    - host: helloworld-${SESSION_NAMESPACE}.tanzudemo.frankcarta.com
       http:
         paths:
           - backend:
@@ -15,7 +16,7 @@ spec:
                 port: 
                   number: 8080
             pathType: ImplementationSpecific
-    - host: hello.helloworld.tanzudemo.frankcarta.com
+    - host: hello.helloworld-${SESSION_NAMESPACE}.tanzudemo.frankcarta.com
       http:
         paths:
           - backend:

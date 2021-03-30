@@ -38,7 +38,7 @@ What are the problems with Ingress?
 
 lets see IngressRoute resource definition file 
 
-```execute t2
+```execute-2
 cat helloworld-ingressroute.yaml
 ```
 

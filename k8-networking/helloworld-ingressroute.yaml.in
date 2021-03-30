@@ -2,6 +2,7 @@ apiVersion: contour.heptio.com/v1beta1
 kind: IngressRoute
 metadata:
   name: helloworld-ingress-route
+  namespace: ${SESSION_NAMESPACE}
 spec:
   virtualhost:
     fqdn: helloworld.tanzudemo.frankcarta.com # On root we defined virtual host
@@ -20,6 +21,7 @@ apiVersion: contour.heptio.com/v1beta1
 kind: IngressRoute
 metadata:
   name: helloworld-ingress-route
+  namespace: helloworld
 spec:
   # virtualhost:
   #   fqdn: helloworld.tanzudemo.frankcarta.com 

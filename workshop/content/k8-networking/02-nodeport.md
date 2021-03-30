@@ -46,29 +46,14 @@ Describe the Service
 kubectl describe svc helloworld 
 ```
 
-  Name:                     helloworld
-  Namespace:                my-apps
-  Labels:                   app=helloworld
-  Annotations:              Selector:  app=helloworld
-  Type:                     NodePort
-  IP:                       172.21.86.16
-  Port:                     <unset>  8080/TCP
-  TargetPort:               http-server/TCP
-  NodePort:                 <unset>  32387/TCP
-  Endpoints:                172.30.172.228:8080,172.30.234.176:8080,172.30.234.177:8080
-  Session Affinity:         None
-  External Traffic Policy:  Cluster
-  Events:                   <none>
-
-
-Kubernetes added a NodePort, in the example with port value `32387`.
+Kubernetes added a NodePort, in the example with port value `30007`.
 
 You can now connect to the service from outside the cluster via the public IP address of any worker node in the cluster and traffic will be forwarded to the service. Service discovery with the selector and labels is used to deliver the request to one of the pod's IP addresses. With this piece in place we now have a complete pipeline for load balancing external client requests to all the nodes in the cluster.
 
 To connect to the service, we need the Public IP address of one of the worker nodes and the NodePort of the Service. You can use a bash processor called [`jq`](https://stedolan.github.io/jq/) to parse JSON from command line.
 
 ```execute
-PUBLIC_IP=$(kubectl get nodes -o wide -o json | jq -r '.items[0].status.addresses | .[] | select( .type=="InternalIP" ) | .address '
+PUBLIC_IP=$(kubectl get nodes -o wide -o json | jq -r '.items[0].status.addresses | .[] | select( .type=="InternalIP" ) | .address ')
 echo $PUBLIC_IP
 ```
 

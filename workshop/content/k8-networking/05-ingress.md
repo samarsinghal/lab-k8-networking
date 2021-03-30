@@ -43,22 +43,6 @@ Make sure, the values for the `hosts`, `secretName` and `host` are set correctly
 cat helloworld-ingress.yaml 
 ```
 
-  apiVersion: extensions/v1beta1
-  kind: Ingress
-  metadata:
-    name: helloworld-ingress
-    annotations:
-      kubernetes.io/ingress.class: contour
-  spec:
-    rules:
-    - host: helloworld.tanzudemo.frankcarta.com
-      http:
-        paths:
-        - path: /
-          pathType: ImplementationSpecific
-          backend:
-            serviceName: helloworld
-
 The above resource will create an access path to the helloworld at `http://helloworld.tanzudemo.frankcarta.com`. 
 
 Create the Ingress for helloworld
@@ -70,7 +54,7 @@ kubectl create -f helloworld-ingress.yaml
 Try to access the `helloworld` API and the proxy using the Ingress Subdomain with the path to the service,
 
 ```execute
-curl -L -X POST "http://helloworld.tanzudemo.frankcarta.com/api/messages" -H 'Content-Type: application/json' -d '{ "sender": "world1" }'
+curl -L -X POST "http://helloworld-$SESSION_NAMESPACE.tanzudemo.frankcarta.com/api/messages" -H 'Content-Type: application/json' -d '{ "sender": "world1" }'
 ```
 
 {"id":"c806432d-0f84-45bb-a654-0b6be0146044","sender":"world3","message":"Hello world1 (direct)","host":null}
@@ -80,27 +64,6 @@ If you instead want to use subdomain paths instead of URI paths,
 ```execute
 cat helloworld-ingress-subdomain.yaml
 ```
-
-  apiVersion: extensions/v1beta1
-  kind: Ingress
-  metadata:
-    name: helloworld-ingress
-    annotations:
-      kubernetes.io/ingress.class: contour
-  spec:
-    rules:
-      - host: helloworld.tanzudemo.frankcarta.com
-        http:
-          paths:
-            - backend:
-                serviceName: helloworld
-                servicePort: 8080
-      - host: hello.helloworld.tanzudemo.frankcarta.com
-        http:
-          paths:
-            - backend:
-                serviceName: helloworld
-                servicePort: 8080
 
 Delete the previous Ingress resource and create the Ingress resource using subdomain paths.
 
@@ -113,7 +76,7 @@ kubectl create -f helloworld-ingress-subdomain.yaml
 Try to access the application using the subdomain,
 
 ```execute
-curl -L -X POST "http://hello.helloworld.tanzudemo.frankcarta.com/api/messages" -H 'Content-Type: application/json' -d '{ "sender": "world4" }'
+curl -L -X POST "http://hello.helloworld-$SESSION_NAMESPACE.tanzudemo.frankcarta.com/api/messages" -H 'Content-Type: application/json' -d '{ "sender": "world4" }'
 ```
 
 {"id":"ea9c00e9-190a-4d83-ab8a-cf6e81c1bb10","sender":"world4","message":"Hello world4 (direct)","host":null}

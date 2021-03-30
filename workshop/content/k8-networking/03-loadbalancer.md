@@ -65,9 +65,6 @@ The `TYPE` should be set to `LoadBalancer` now, and an `EXTERNAL-IP` should be a
 kubectl get svc helloworld
 ```
 
-NAME         TYPE           CLUSTER-IP     EXTERNAL-IP      PORT(S)          AGE
-helloworld   LoadBalancer   172.21.86.16   169.47.155.242   8080:32387/TCP   12m
-
 To access the Service of the `helloworld` from the public internet, you can use the public IP address of the NLB and the assigned NodePort of the service in the format `<IP_address>:<NodePort>`.
 
 ```execute
