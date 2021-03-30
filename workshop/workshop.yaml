@@ -10,5 +10,5 @@ modules:
     - k8-networking/04-externalname
     - k8-networking/05-ingress
     - k8-networking/06-contour
-    - k8-networking/07-networkpolicy
+    # - k8-networking/07-networkpolicy
     - workshop-summary

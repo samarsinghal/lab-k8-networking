@@ -21,4 +21,4 @@ spec:
 
 When looking up the service `my-database-svc.prod.svc.cluster.local`, the cluster DNS Service returns a CNAME record for `my.database.example.com`.
 
-Next, go to [Ingress](ingress.md). 
+Next, go to Ingress

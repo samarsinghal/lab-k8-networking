@@ -16,8 +16,8 @@ modules:
         name: k8 Networking - Ingress
     k8-networking/06-contour:
         name: k8 Networking - Contour
-    k8-networking/07-networkpolicy:
-        name: k8 Networking - Network Policy and Calico
+    # k8-networking/07-networkpolicy:
+    #     name: k8 Networking - Network Policy and Calico
     workshop-summary:
         name: Workshop Summary
         exit_sign: Finish Workshop

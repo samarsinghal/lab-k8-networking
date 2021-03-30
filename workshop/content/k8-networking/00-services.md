@@ -56,7 +56,7 @@ The default type is `ClusterIP`. To expose a Service onto an external IP address
 Available Service types:
 
 - **ClusterIP**: Exposes the Service on a cluster-internal IP. This is the default ServiceType.
-- **NodePort**: Exposes the Service on each Node’s IP at a static port (the NodePort). A ClusterIP Service, to which the NodePort Service routes, is automatically created. You’ll be able to contact the NodePort Service, from outside the cluster, by requesting <NodeIP>:<NodePort>.
+- **NodePort**: Exposes the Service on each Node’s IP at a static port (the NodePort). A ClusterIP Service, to which the NodePort Service routes, is automatically created. You’ll be able to contact the NodePort Service, from outside the cluster, by requesting NodeIP:NodePort.
 - **LoadBalancer**: Exposes the Service externally using a cloud provider’s load balancer. NodePort and ClusterIP Services, to which the external load balancer routes, are automatically created.
 - **ExternalName**: Maps the Service to the contents of the externalName field (e.g. foo.bar.example.com), by returning a CNAME record.
 
@@ -65,4 +65,4 @@ You can also use `Ingress` in place of `Service` to expose HTTP/HTTPS Services. 
 
 ## Next
 
-Next, go to [ClusterIP](clusterip.md) to learn more about ServiceType ClusterIP.
+Next, go to ClusterIP to learn more about ServiceType ClusterIP.

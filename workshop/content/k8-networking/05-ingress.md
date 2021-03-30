@@ -30,6 +30,12 @@ Note that an ingress controller typically doesn’t eliminate the need for an ex
 
 Instead of using `<external-ip>:<nodeport>` to access the HelloWorld app, we want to access our HelloWorld aplication via the URL `<Ingress-subdomain>:<nodeport>/<path>`. 
 
+Lets first create helloworld-service
+
+```execute
+kubectl apply -f helloworld-service.yaml
+```
+
 
 Make sure, the values for the `hosts`, `secretName` and `host` are set correctly to match the values of the Ingress Subdomain and Secret of your cluster. 
 
@@ -136,4 +142,4 @@ Unless you’re running a very simple cloud application, you’ll likely need su
 
 ## Next
 
-Next, go to [Contour](../../../k8-networking/06-contour.md).
+Next, go to Contour

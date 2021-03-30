@@ -24,14 +24,40 @@ kubectl get svc
 ```
 
 NAME         TYPE       CLUSTER-IP     EXTERNAL-IP   PORT(S)          AGE
-helloworld   NodePort   172.21.86.16   <none>        8080:32387/TCP   12m
+helloworld   NodePort   172.21.86.16   <none>        8080:30007/TCP   12m
 
 
-Patch the service for `helloworld` and change the type to `LoadBalancer`.
+Update the service for `helloworld` and change the type to `LoadBalancer`.
 
 ```execute
-kubectl patch svc helloworld -p '{"spec": {"type": "LoadBalancer"}}'
+cat helloworld-service-loadbalancer.yaml
 ```
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: helloworld
+  labels:
+    app: helloworld
+spec:
+  ports:
+  - port: 80
+    targetPort: 8080
+    protocol: TCP
+    nodePort: 30007
+  selector:
+    app: helloworld
+  type: LoadBalancer
+
+
+
+To apply changes to the configuration from file,
+
+```execute
+kubectl apply -f helloworld-service-loadbalancer.yaml
+```
+
+service/helloworld configured
 
 The `TYPE` should be set to `LoadBalancer` now, and an `EXTERNAL-IP` should be assigned.
 
@@ -47,19 +73,23 @@ To access the Service of the `helloworld` from the public internet, you can use 
 ```execute
 PUBLIC_IP=$(kubectl get svc helloworld --output json | jq -r '.status.loadBalancer.ingress[0].hostname')
 echo $PUBLIC_IP
-
-NODE_PORT=$(kubectl get svc helloworld --output json | jq -r '.spec.ports[0].nodePort' )
-echo $NODE_PORT
 ```
 
 Access the `helloworld` app in a browser or with Curl,
 
 ```execute
-curl -L -X POST "http://$PUBLIC_IP:$NODE_PORT/api/messages" -H 'Content-Type: application/json' -d '{ "sender": "world2" }'
+curl -L -X POST "http://$PUBLIC_IP/api/messages" -H 'Content-Type: application/json' -d '{ "sender": "world2" }'
 ```
 
 {"id":"0ebdc166-32cd-4d0d-93b6-f278e4405c6f","sender":"world2","message":"Hello world2 (direct)","host":null}
 
 Note:- Services of type `LoadBalancer` have some limitations. They cannot do TLS termination, do virtual hosts or path-based routing, so you can’t use a single load balancer to proxy to multiple services. These limitations led to the addition in Kubernetes v1.2 of a separate kubernetes resource called `Ingress`.
 
-Next, go to [ExternalName](../../../k8-networking/externalname.md).
+Cleanup delete loadbalancer service 
+
+```execute
+kubectl delete -f helloworld-service-loadbalancer.yaml
+```
+
+
+Next, go to ExternalName

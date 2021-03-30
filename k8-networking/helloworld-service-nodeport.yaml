@@ -7,7 +7,8 @@ metadata:
 spec:
   ports:
   - port: 8080
-    targetPort: http-server
+    targetPort: 8080
+    nodePort: 30007
   selector:
     app: helloworld
   type: NodePort

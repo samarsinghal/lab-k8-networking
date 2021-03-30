@@ -18,5 +18,4 @@ spec:
       - name: helloworld
         image: remkohdev/helloworld
         ports:
-        - name: http-server
-          containerPort: 8080
+        - containerPort: 8080

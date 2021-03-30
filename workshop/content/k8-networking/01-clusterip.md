@@ -54,6 +54,19 @@ Endpoints:         172.30.172.228:8080,172.30.234.176:8080,172.30.234.177:8080
 Session Affinity:  None
 Events:            <none>
 
+Lets test service 
+
+```execute
+CLUSTER_IP=$(kubectl get svc -o wide -o json | jq -r '.items[0].spec.clusterIP')
+echo $CLUSTER_IP
+```
+
+```execute
+curl -L -X POST "http://$CLUSTER_IP:8080/api/messages" -H 'Content-Type: application/json' -d '{ "sender": "world1" }'
+```
+
+{"id":"5e2efa73-ed9f-4e83-884b-4a717aa5c584","sender":"world1","message":"Hello world1 (direct)","host":null}
+
 You see that Kubernetes by default creates a Service of type `ClusterIP`. The service is now available and discoverable, but only within the cluster, using the `Endpoints` and `port` mapping found via the `selector` and `labels`.
 
-Go to [NodePort](nodeport.md) to learn more about ServiceType NodePort.
+Go to NodePort to learn more about ServiceType NodePort.

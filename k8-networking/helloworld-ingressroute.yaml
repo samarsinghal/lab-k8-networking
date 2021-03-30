@@ -4,9 +4,35 @@ metadata:
   name: helloworld-ingress-route
 spec:
   virtualhost:
-    fqdn: helloworld.tanzudemo.frankcarta.com #
+    fqdn: helloworld.tanzudemo.frankcarta.com # On root we defined virtual host
   routes:
   - match: /
+    delegate:
+      name: helloworld-ingress-route
+      namespace: helloworld
+  - match: /message
+    delegate:
+      name: helloworld-ingress-message-route
+      namespace: hellowworld-message
+
+
+apiVersion: contour.heptio.com/v1beta1
+kind: IngressRoute
+metadata:
+  name: helloworld-ingress-route
+spec:
+  # virtualhost:
+  #   fqdn: helloworld.tanzudemo.frankcarta.com 
+  # No virtual host defined its not root
+  routes:
+  - match: /
+    enableWebsockets: true # Support websocket
     services:
-    - name: helloworld
+    - name: helloworld-v0.9
       port: 80
+      weight: 10
+    - name: helloworld-v1.0 # multiple services mapped to same path 
+      port: 80
+      weight: 90
+    strategy: WeightedLeastRequest
+

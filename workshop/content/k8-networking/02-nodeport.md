@@ -10,15 +10,7 @@ To expose a Service to an external IP address, you have to create a ServiceType 
 
 To allow external traffic into a kubernetes cluster, you need a `NodePort` ServiceType. When kubernetes creates a NodePort service, `kube-proxy` allocates a port in the range **30000-32767** and opens this port on the `eth0` interface of every node (the `NodePort`). Connections to this port are then forwarded to the service’s cluster IP. A gateway router typically sits in front of the cluster and forwards packets to the node.
 
-Patch the existing Service for `helloworld` to `type: NodePort` using the `kubectl patch` command,
-
-```execute
-kubectl patch svc helloworld -p '{"spec": {"type": "NodePort"}}'
-```
-
-service/helloworld patched
-
-You can also add a property `type: NodePort` in the specification in the file `helloworld-service-nodeport.yaml`,
+Add a property `type: NodePort` in the specification in the file `helloworld-service-nodeport.yaml`,
 
 ```execute
 cat helloworld-service-nodeport.yaml
@@ -33,10 +25,12 @@ cat helloworld-service-nodeport.yaml
   spec:
     ports:
     - port: 8080
-      targetPort: http-server
+      targetPort: 8080
+      nodePort: 30007
     selector:
       app: helloworld
     type: NodePort
+
 
 
 To apply changes to the configuration from file,
@@ -73,11 +67,10 @@ You can now connect to the service from outside the cluster via the public IP ad
 
 To connect to the service, we need the Public IP address of one of the worker nodes and the NodePort of the Service. You can use a bash processor called [`jq`](https://stedolan.github.io/jq/) to parse JSON from command line.
 
-On this lab we don't have access to list nodes 
-
-PUBLIC_IP=$(kubectl get nodes -o wide -o json | jq -r '.items[0].status.addresses | .[] | select( .type=="ExternalIP" ) | .address ')
+```execute
+PUBLIC_IP=$(kubectl get nodes -o wide -o json | jq -r '.items[0].status.addresses | .[] | select( .type=="InternalIP" ) | .address '
 echo $PUBLIC_IP
-
+```
 
 ```execute
 NODE_PORT=$(kubectl get svc helloworld --output json | jq -r '.spec.ports[0].nodePort' )
@@ -87,7 +80,7 @@ echo $NODE_PORT
 Test the deployment,
 
 ```execute
-$ curl -L -X POST "http://$PUBLIC_IP:$NODE_PORT/api/messages" -H 'Content-Type: application/json' -d '{ "sender": "world1" }'
+curl -L -X POST "http://$PUBLIC_IP:$NODE_PORT/api/messages" -H 'Content-Type: application/json' -d '{ "sender": "world1" }'
 ```
 
 Output:
@@ -95,4 +88,4 @@ Output:
 
 The client connects to your application via a public IP address of a worker node and the NodePort. Each node proxies the port, `kube-proxy` receives the request, and forwards it to the service at the cluster IP. At this point the request matches the netfilter or `iptables` rules and gets redirected to the server pod. 
 
-However, we still require some level of load balancing. a `LoadBalancer` service is the standard way to expose a service. Go to [LoadBalancer](../../../k8-networking/loadbalancer.md) to learn more about the ServiceType LoadBalancer.
+However, we still require some level of load balancing. a `LoadBalancer` service is the standard way to expose a service. Go to LoadBalancer to learn more about the ServiceType LoadBalancer.
